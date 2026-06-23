@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nuuli OI | 信奥学习与训练入口</title>
+    <meta
+      name="description"
+      content="Nuuli OI 是信奥学习与训练的总入口，连接信奥教程、信奥真题和后续训练工具。"
+    />
+    <meta name="theme-color" content="#f7f4ec" />
+    <style>
+      :root {
+        --paper: #f7f4ec;
+        --ink: #18140f;
+        --muted: #665f54;
+        --line: #d8d0c3;
+        --panel: #fffaf0;
+        --blue: #2157d6;
+        --teal: #08766d;
+        --amber: #b46118;
+        --shadow: 0 24px 80px rgba(35, 28, 18, 0.11);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-height: 100%;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        color: var(--ink);
+        font-family:
+          ui-serif, "Iowan Old Style", "Palatino Linotype", "Noto Serif SC",
+          "Songti SC", serif;
+        background:
+          linear-gradient(rgba(24, 20, 15, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(24, 20, 15, 0.035) 1px, transparent 1px),
+          radial-gradient(circle at 18% 16%, rgba(8, 118, 109, 0.16), transparent 30%),
+          radial-gradient(circle at 82% 8%, rgba(180, 97, 24, 0.16), transparent 28%),
+          var(--paper);
+        background-size: 28px 28px, 28px 28px, auto, auto, auto;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        width: min(1120px, calc(100% - 32px));
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 28px 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 8px 0 24px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .mark {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--ink);
+        background: var(--ink);
+        color: var(--paper);
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 1;
+        box-shadow: 5px 5px 0 #dbc8a8;
+      }
+
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+      }
+
+      .brand-name {
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      .brand-sub {
+        color: var(--muted);
+        font-size: 13px;
+        font-family:
+          ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Noto Sans SC", sans-serif;
+      }
+
+      .nav {
+        display: flex;
+        gap: 10px;
+        color: var(--muted);
+        font-family:
+          ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Noto Sans SC", sans-serif;
+        font-size: 14px;
+      }
+
+      .nav a {
+        padding: 8px 10px;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+      }
+
+      .nav a:hover {
+        color: var(--ink);
+        border-color: var(--ink);
+      }
+
+      .hero {
+        flex: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 0.98fr) minmax(360px, 0.82fr);
+        align-items: center;
+        gap: 56px;
+        padding: 36px 0 64px;
+      }
+
+      .eyebrow {
+        width: fit-content;
+        margin: 0 0 22px;
+        padding: 6px 10px;
+        border: 1px solid var(--line);
+        color: var(--teal);
+        background: rgba(255, 250, 240, 0.72);
+        font-family:
+          ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Noto Sans SC", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin: 0;
+        font-size: clamp(48px, 8vw, 104px);
+        line-height: 0.93;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 650px;
+        margin: 24px 0 0;
+        color: #3d372f;
+        font-size: 21px;
+        line-height: 1.72;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 34px;
+        font-family:
+          ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Noto Sans SC", sans-serif;
+      }
+
+      .button {
+        min-height: 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        padding: 11px 16px;
+        border: 1px solid var(--ink);
+        background: var(--ink);
+        color: var(--paper);
+        text-decoration: none;
+        font-weight: 800;
+        box-shadow: 4px 4px 0 #dbc8a8;
+        transition:
+          transform 160ms ease,
+          box-shadow 160ms ease;
+      }
+
+      .button.secondary {
+        background: var(--panel);
+        color: var(--ink);
+      }
+
+      .button:hover {
+        transform: translate(-1px, -1px);
+        box-shadow: 6px 6px 0 #dbc8a8;
+      }
+
+      .button svg {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+      }
+
+      .console {
+        position: relative;
+        min-height: 476px;
+        padding: 18px;
+        border: 1px solid var(--ink);
+        background: rgba(255, 250, 240, 0.88);
+        box-shadow: var(--shadow);
+      }
+
+      .console::before {
+        content: "";
+        position: absolute;
+        inset: 11px -11px -11px 11px;
+        z-index: -1;
+        border: 1px solid var(--ink);
+        background:
+          linear-gradient(135deg, rgba(33, 87, 214, 0.2), transparent 38%),
+          #e8dcc8;
+      }
+
+      .console-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--line);
+        font-family:
+          ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Noto Sans SC", sans-serif;
+      }
+
+      .dots {
+        display: flex;
+        gap: 7px;
+      }
+
+      .dots span {
+        width: 10px;
+        height: 10px;
+        border: 1px solid var(--ink);
+        border-radius: 50%;
+      }
+
+      .dots span:nth-child(1) {
+        background: var(--amber);
+      }
+
+      .dots span:nth-child(2) {
+        background: var(--teal);
+      }
+
+      .dots span:nth-child(3) {
+        background: var(--blue);
+      }
+
+      .console-title {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .route-list {
+        display: grid;
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .route {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 14px;
+        min-height: 92px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.48);
+        text-decoration: none;
+        transition:
+          border-color 160ms ease,
+          transform 160ms ease,
+          background 160ms ease;
+      }
+
+      .route[href]:hover {
+        border-color: var(--ink);
+        background: #fffdf6;
+        transform: translateY(-2px);
+      }
+
+      .route-icon {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--ink);
+        background: #f1e4cf;
+      }
+
+      .route-icon svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .route h2 {
+        margin: 0 0 5px;
+        font-size: 20px;
+        line-height: 1.25;
+      }
+
+      .route p {
+        margin: 0;
+        color: var(--muted);
+        font-family:
+          ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Noto Sans SC", sans-serif;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .route-meta {
+        min-width: 94px;
+        color: var(--muted);
+        font-family:
+          ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Noto Sans SC", sans-serif;
+        font-size: 13px;
+        text-align: right;
+      }
+
+      .soon {
+        cursor: default;
+        opacity: 0.78;
+      }
+
+      .soon .route-icon {
+        background: #ebe5d9;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .status::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      .foot {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 22px 0 8px;
+        border-top: 1px solid rgba(24, 20, 15, 0.14);
+        color: var(--muted);
+        font-family:
+          ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Noto Sans SC", sans-serif;
+        font-size: 13px;
+      }
+
+      .foot a {
+        text-decoration: none;
+        border-bottom: 1px solid rgba(102, 95, 84, 0.35);
+      }
+
+      .foot a:hover {
+        color: var(--ink);
+        border-color: var(--ink);
+      }
+
+      @media (max-width: 860px) {
+        .page {
+          width: min(100% - 24px, 640px);
+          padding: 18px 0;
+        }
+
+        .topbar {
+          align-items: flex-start;
+        }
+
+        .nav {
+          display: none;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 30px;
+          padding: 28px 0 42px;
+        }
+
+        h1 {
+          font-size: clamp(48px, 16vw, 76px);
+        }
+
+        .lead {
+          font-size: 18px;
+          line-height: 1.68;
+        }
+
+        .console {
+          min-height: auto;
+          padding: 14px;
+        }
+
+        .console::before {
+          inset: 8px -8px -8px 8px;
+        }
+
+        .route {
+          grid-template-columns: auto 1fr;
+          min-height: 88px;
+        }
+
+        .route-meta {
+          grid-column: 2;
+          min-width: 0;
+          text-align: left;
+        }
+
+        .foot {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+
+      @media (max-width: 460px) {
+        .brand-sub {
+          max-width: 180px;
+        }
+
+        .actions {
+          display: grid;
+        }
+
+        .button {
+          width: 100%;
+        }
+
+        .route {
+          gap: 12px;
+          padding: 13px;
+        }
+
+        .route h2 {
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar" aria-label="Nuuli OI">
+        <a class="brand" href="/" aria-label="Nuuli OI 首页">
+          <span class="mark">N</span>
+          <span class="brand-text">
+            <span class="brand-name">Nuuli OI</span>
+            <span class="brand-sub">信奥学习与训练入口</span>
+          </span>
+        </a>
+        <nav class="nav" aria-label="主要入口">
+          <a href="https://l.nuuli.com">教程</a>
+          <a href="https://g.nuuli.com">真题</a>
+        </nav>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">NOI / CSP / C++ / Algorithm</p>
+          <h1 id="page-title">Nuuli OI</h1>
+          <p class="lead">
+            一个面向信息学奥赛学习者的总入口。先从教程和真题开始，后续逐步接入题单、训练工具和学习记录。
+          </p>
+          <div class="actions" aria-label="快捷入口">
+            <a class="button" href="https://l.nuuli.com">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M5 5.5A2.5 2.5 0 0 1 7.5 3H20v15H7.5A2.5 2.5 0 0 0 5 20.5v-15Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                />
+                <path d="M5 5.5v15" stroke="currentColor" stroke-width="1.8" />
+                <path d="M9 7h7M9 10h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+              进入信奥教程
+            </a>
+            <a class="button secondary" href="https://g.nuuli.com">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M7 4h10a2 2 0 0 1 2 2v14H5V6a2 2 0 0 1 2-2Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                />
+                <path d="M9 8h6M9 12h6M9 16h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+              查看信奥真题
+            </a>
+          </div>
+        </div>
+
+        <aside class="console" aria-label="入口列表">
+          <div class="console-head">
+            <div class="dots" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <span class="console-title">nuuli.com/routes</span>
+          </div>
+
+          <div class="route-list">
+            <a class="route" href="https://l.nuuli.com">
+              <span class="route-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 19.5V5.8A2.8 2.8 0 0 1 6.8 3H20v16H6.8A2.8 2.8 0 0 0 4 21.8v-2.3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+                  <path d="M8 7h7M8 10h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                </svg>
+              </span>
+              <span>
+                <h2>信奥教程</h2>
+                <p>系统学习 C++、算法基础和竞赛知识点。</p>
+              </span>
+              <span class="route-meta">l.nuuli.com</span>
+            </a>
+
+            <a class="route" href="https://g.nuuli.com">
+              <span class="route-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6 4h12v16H6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+                  <path d="M9 8h6M9 12h6M9 16h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                </svg>
+              </span>
+              <span>
+                <h2>信奥真题</h2>
+                <p>集中进入真题练习，适合复习、刷题和赛前训练。</p>
+              </span>
+              <span class="route-meta">g.nuuli.com</span>
+            </a>
+
+            <div class="route soon" aria-label="工具箱待添加">
+              <span class="route-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 7h16M7 4v6M17 4v6M6 13h5M6 17h8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                </svg>
+              </span>
+              <span>
+                <h2>训练工具</h2>
+                <p>题单、错题本、代码工具和学习记录，后续添加。</p>
+              </span>
+              <span class="route-meta status">待添加</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <footer class="foot">
+        <span>© 2026 Nuuli OI</span>
+        <span>教程：<a href="https://l.nuuli.com">l.nuuli.com</a> · 真题：<a href="https://g.nuuli.com">g.nuuli.com</a></span>
+      </footer>
+    </main>
+  </body>
+</html>
